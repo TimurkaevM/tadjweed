@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import VideoListScreen from './VideoListScreen';
 import VideoPlayerScreen from './VideoPlayerScreen';
 import { getCurrentUser } from '../redux/ducks/user';
 import { getVideos } from '../redux/ducks/videos';
 import color from '../misk/color';
-// import * as ScreenOrientation from 'expo-screen-orientation';
+import * as ScreenOrientation from 'expo-screen-orientation';
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 function TadjveedScreen() {
-  // ScreenOrientation.unlockAsync();
+  ScreenOrientation.unlockAsync();
   const dispatch = useDispatch();
 
   useEffect(() => {

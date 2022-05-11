@@ -1,9 +1,10 @@
 import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import AuthScreen from './AuthScreen';
 import RegistrationScreen from './RegistrationScreen';
+import * as ScreenOrientation from 'expo-screen-orientation';
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 const config = {
   animation: 'timing',
@@ -18,6 +19,8 @@ const config = {
 };
 
 function EntranceScreen() {
+  ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
+
   return (
     <Stack.Navigator initialRouteName="Auth">
       <Stack.Screen

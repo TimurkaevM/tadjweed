@@ -14,8 +14,7 @@ import { registration, ChangeError } from '../redux/ducks/auth';
 
 function RegistrationScreen() {
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.user.loading);
-  const error = useSelector((state) => state.user.error);
+  const error = useSelector((state) => state.auth.error);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -25,19 +24,37 @@ function RegistrationScreen() {
   const [passwordError, setPasswordError] = useState(null);
   const [nameError, setNameError] = useState(null);
 
-  console.log(confirmed);
-
   const emailChange = (e) => {
-    setEmailError(null);
+    if(error) {
+      dispatch(ChangeError())
+      setEmailError(null);
+    } else {
+      setEmailError(null);
+    }
   };
   const nameChange = (e) => {
-    setNameError(null);
+    if(error) {
+      dispatch(ChangeError())
+      setNameError(null);
+    } else {
+      setNameError(null);
+    }
   };
   const passwordChange = (e) => {
-    setPasswordError(null);
+    if(error) {
+      dispatch(ChangeError())
+      setPasswordError(null);
+    } else {
+      setPasswordError(null);
+    }
   };
   const confirmedChange = (e) => {
-    setPasswordError(null);
+    if(error) {
+      dispatch(ChangeError())
+      setPasswordError(null);
+    } else {
+      setPasswordError(null);
+    }
   };
 
   const handleClick = (e) => {
@@ -149,9 +166,10 @@ function RegistrationScreen() {
             </Text>
           </TouchableOpacity>
         </View>
-        {emailError && <Text style={{ color: 'red' }}>{emailError}</Text>}
-        {passwordError && <Text style={{ color: 'red' }}>{passwordError}</Text>}
-        {nameError && <Text style={{ color: 'red' }}>{nameErrnull}</Text>}
+        {emailError && <Text style={{ marginTop: 20, color: 'red' }}>{emailError}</Text>}
+        {passwordError && <Text style={{ marginTop: 20, color: 'red' }}>{passwordError}</Text>}
+        {nameError && <Text style={{ marginTop: 20, color: 'red' }}>{nameErrnull}</Text>}
+        {error && <Text style={{ marginTop: 20, color: 'red' }}>{error}</Text>}
       </KeyboardAwareScrollView>
     </ImageBackground>
   );

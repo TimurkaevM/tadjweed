@@ -6,7 +6,6 @@ import * as MediaLibrary from 'expo-media-library';
 import VideoListItem from '../components/VideoListItem';
 import StatusBarPlaceHolder from '../misk/StatusBarPlaceHolder';
 import HeaderVideos from '../components/HeaderVideos';
-// import SkeletonContent from 'react-native-skeleton-content';
 import color from '../misk/color';
 import {
   LayoutProvider,
@@ -103,26 +102,12 @@ const VideoListScreen = ({navigation}) => {
 
   const rowRender = (type, item) => {
     return (
-      // <SkeletonContent
-      //   containerStyle={{ flex: 1 }}
-      //   isLoading={loading}
-      //   layout={[
-      //     {
-      //       key: 'someId',
-      //       width: 320,
-      //       height: 260,
-      //       marginBottom: 6,
-      //       alignSelf: 'center',
-      //     },
-      //   ]}
-      // >
         <VideoListItem
           navigate={navigate}
           is_watched={item.is_watched}
           id={item.id}
           preview={item.preview}
         />
-      // </SkeletonContent>
     );
   };
 

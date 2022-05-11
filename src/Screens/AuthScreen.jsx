@@ -9,9 +9,9 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { login } from '../redux/ducks/auth';
+import { ChangeError, login } from '../redux/ducks/auth';
 
 export default function AuthScreen(props) {
 
@@ -19,17 +19,29 @@ export default function AuthScreen(props) {
 
   const dispatch = useDispatch();
 
+  const errorAuth = useSelector(state => state.auth.error);
+
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [emailError, setEmailError] = React.useState(null);
   const [passwordError, setPasswordError] = React.useState(null);
 
   const passChange = () => {
-    setPasswordError(null);
+    if(errorAuth) {
+      dispatch(ChangeError())
+      setPasswordError(null);
+    } else {
+      setPasswordError(null);
+    }
   };
 
   const emailChange = () => {
-    setEmailError(null);
+    if(errorAuth) {
+      dispatch(ChangeError())
+      setEmailError(null);
+    } else {
+      setEmailError(null);
+    }
   };
 
   const handleClick = () => {
@@ -147,6 +159,7 @@ export default function AuthScreen(props) {
         </View>
         {emailError && <Text style={{ color: 'red' }}>{emailError}</Text>}
         {passwordError && <Text style={{ color: 'red' }}>{passwordError}</Text>}
+        {errorAuth && <Text style={{ color: 'red' }}>{errorAuth}</Text>}
       </KeyboardAwareScrollView>
     </ImageBackground>
   );

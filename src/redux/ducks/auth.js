@@ -19,7 +19,7 @@ const initialState = {
   loading: false,
   loadingAuth: false,
   message: '',
-  error: '',
+  error: null,
 };
 
 export default function auth(state = initialState, action) {
@@ -152,9 +152,8 @@ export const registration = (email, name, password, password_confirmation) => {
       .catch((e) => {
         dispatch({
           type: CREATE_ERROR,
-          payload: e,
+          payload: 'Пользователь с таким Email, уже существует',
         });
-        console.error(e);
       });
   };
 };
@@ -183,9 +182,8 @@ export const login = (email, password) => {
       .catch((e) => {
         dispatch({
           type: LOGIN_ERROR,
-          payload: e,
+          payload: e.response.data.message,
         });
-        console.error(e);
       });
   };
 };
