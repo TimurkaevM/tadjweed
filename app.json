@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "tadjweed",
+    "name": "Muqri-таджвид",
     "slug": "tadjweed",
     "version": "1.0.0",
     "orientation": "default",
@@ -18,14 +18,16 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.Muqri.tadjweed"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "softwareKeyboardLayoutMode": "pan"
+      "softwareKeyboardLayoutMode": "pan",
+      "package": "com.timurkaev.tadjweed"
     },
     "web": {
       "favicon": "./assets/bg2.png"
