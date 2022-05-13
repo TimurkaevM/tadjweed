@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import { View, StyleSheet, Dimensions, ActivityIndicator } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import VideoPlayer from '../components/VideoPlayer';
 import color from '../misk/color';
@@ -18,6 +18,14 @@ const VideoPlayerScreen = (props) => {
   useEffect(() => {
     dispatch(getVideo(id));
   }, [dispatch, id]);
+
+  if(loading) {
+    return (
+      <View style={styles.preloader}>
+        <ActivityIndicator size={50} color='#16a89e' />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -51,6 +59,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+  },
+  preloader: {
+    flex: 1,
+    justifyContent: "center"
   },
 });
 

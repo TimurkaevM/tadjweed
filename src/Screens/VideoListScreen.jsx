@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Dimensions, Alert } from 'react-native';
+import { Text, View, StyleSheet, Dimensions, Alert, ActivityIndicator } from 'react-native';
 import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
@@ -130,6 +130,14 @@ const VideoListScreen = ({navigation}) => {
     );
   }
 
+  if(loading) {
+    return (
+      <View style={styles.preloader}>
+        <ActivityIndicator size={50} color='#16a89e' />
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <View style={{ flex: 1, backgroundColor: color.FONT }}>
@@ -152,6 +160,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#fff',
+  },
+
+  preloader: {
+    flex: 1,
+    justifyContent: "center"
   },
 });
 
