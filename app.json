@@ -19,7 +19,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.Muqri.tadjweed"
+      "bundleIdentifier": "com.Muqri.tadjweed",
+      "buildNumber": "2"
     },
     "android": {
       "adaptiveIcon": {
