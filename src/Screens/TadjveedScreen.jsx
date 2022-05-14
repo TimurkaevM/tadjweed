@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 import VideoListScreen from './VideoListScreen';
 import VideoPlayerScreen from './VideoPlayerScreen';
@@ -14,10 +14,15 @@ function TadjveedScreen() {
   ScreenOrientation.unlockAsync();
   const dispatch = useDispatch();
 
+  const errorVideos = useSelector(state => state.videos.error);
+
   useEffect(() => {
     dispatch(getCurrentUser());
-    dispatch(getVideos());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getVideos());
+  }, [dispatch, errorVideos]);
 
   return (
     <Stack.Navigator initialRouteName="VideoListScreen">

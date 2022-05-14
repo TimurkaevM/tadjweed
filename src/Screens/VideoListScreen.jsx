@@ -1,8 +1,6 @@
-import { Text, View, StyleSheet, Dimensions, Alert, ActivityIndicator } from 'react-native';
-import React, { useEffect, useState, useCallback } from 'react';
+import { View, StyleSheet, Dimensions, ActivityIndicator } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import * as ImagePicker from 'expo-image-picker';
-import * as MediaLibrary from 'expo-media-library';
 import VideoListItem from '../components/VideoListItem';
 import StatusBarPlaceHolder from '../misk/StatusBarPlaceHolder';
 import HeaderVideos from '../components/HeaderVideos';
@@ -12,77 +10,23 @@ import {
   RecyclerListView,
   DataProvider,
 } from 'recyclerlistview';
+import ErrorVideosInfo from '../misk/ErrorVideosInfo';
 
 const VideoListScreen = ({navigation}) => {
   const { navigate } = navigation;
 
   const videos = useSelector((state) => state.videos.videos);
   const loading = useSelector((state) => state.videos.loading);
+  const errorVideos = useSelector((state) => state.videos.error);
 
-  const [audioFiles, setAudioFiles] = useState([]);
-  const [permissionError, setPermissionError] = useState(false);
+  console.log(videos)
 
   const [dataProvider, setDataProvider] = useState(
     new DataProvider((r1, r2) => r1 !== r2),
   );
 
-  const getPermission = useCallback(async () => {
-    const permission = await ImagePicker.getMediaLibraryPermissionsAsync();
-    if (permission.granted) {
-      getAudioFiles();
-    }
-
-    if (!permission.canAskAgain && !permission.granted) {
-      setPermissionError(true);
-    }
-
-    if (!permission.granted && permission.canAskAgain) {
-      const { status, canAskAgain } =
-        await ImagePicker.requestMediaLibraryPermissionsAsync();
-
-      if (status === 'denied' && canAskAgain) {
-        permissionAlert();
-      }
-
-      if (status === 'granted') {
-        getAudioFiles();
-      }
-
-      if (status === 'denied' && !canAskAgain) {
-        setPermissionError(true);
-      }
-    }
-  }, []);
-
-  const permissionAlert = () => {
-    Alert.alert('Permission Required', 'This app needs to read audio files', [
-      {
-        text: 'I am ready',
-        onPress: () => getPermission(),
-      },
-      {
-        text: 'cancel',
-        onPress: () => permissionAlert(),
-      },
-    ]);
-  };
-
-  const getAudioFiles = async () => {
-    let media = await MediaLibrary.getAssetsAsync({
-      mediaType: 'video',
-    });
-    media = await MediaLibrary.getAssetsAsync({
-      mediaType: 'video',
-      first: media.totalCount,
-    });
-    setAudioFiles([...audioFiles, ...media.assets]);
-    setDataProvider(
-      dataProvider.cloneWithRows([...audioFiles, ...media.assets]),
-    );
-  };
-
   const getVideoFiles = async () => {
-    setDataProvider(dataProvider.cloneWithRows([...videos, ...videos]));
+    setDataProvider(dataProvider.cloneWithRows([...videos]));
   };
 
   const layoutProvider = new LayoutProvider(
@@ -111,24 +55,9 @@ const VideoListScreen = ({navigation}) => {
     );
   };
 
-  // useEffect(() => {
-  //   getPermission();
-  // }, []);
-
   useEffect(() => {
     getVideoFiles();
   }, [videos]);
-
-
-  if (permissionError) {
-    return (
-      <View style={styles.container}>
-        <Text style={{ fontSize: 25, textAlign: 'center', color: 'red' }}>
-          It looks like you haven't accept the permission.
-        </Text>
-      </View>
-    );
-  }
 
   if(loading) {
     return (
@@ -143,12 +72,16 @@ const VideoListScreen = ({navigation}) => {
       <View style={{ flex: 1, backgroundColor: color.FONT }}>
         <StatusBarPlaceHolder />
         <HeaderVideos />
-        {dataProvider && dataProvider.getSize() > 0 && (
-          <RecyclerListView
-            dataProvider={dataProvider}
-            layoutProvider={layoutProvider}
-            rowRenderer={rowRender}
-          />
+        {errorVideos ? (
+          <ErrorVideosInfo />
+        ) : (
+          dataProvider && dataProvider.getSize() > 0 && (
+            <RecyclerListView
+              dataProvider={dataProvider}
+              layoutProvider={layoutProvider}
+              rowRenderer={rowRender}
+            />
+          )
         )}
       </View>
     </View>
@@ -160,6 +93,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#fff',
+  },
+
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
   preloader: {

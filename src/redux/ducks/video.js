@@ -3,9 +3,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const GET_VIDEO_START = 'get/video/start';
 const GET_VIDEO_SUCCESS = 'get/video/success';
+const GET_VIDEO_ERROR = 'get/video/error';
+const VIDEO_RELOAD = 'video/reload';
 
 const initialState = {
   video: {},
+  error: null,
   loading: false,
 };
 
@@ -23,6 +26,19 @@ export default function video(state = initialState, action) {
         video: action.payload,
         loading: false,
       };
+    
+    case GET_VIDEO_ERROR:
+      return {
+        ...state,
+        error: 'Произошла ошибка при загрузке...',
+        loading: false,
+      };
+
+    case VIDEO_RELOAD: 
+      return {
+        ...state,
+        error: null,
+      }
 
     default:
       return state;
@@ -55,7 +71,16 @@ export const getVideo = (id) => {
         });
       }
     } catch (e) {
+      dispatch({
+        type: GET_VIDEO_ERROR,
+      })
       console.log(e.response);
     }
+  };
+};
+
+export const changeErrorVideo = () => {
+  return {
+    type: VIDEO_RELOAD,
   };
 };

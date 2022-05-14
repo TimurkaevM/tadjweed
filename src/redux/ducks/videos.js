@@ -3,6 +3,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const GET_VIDEOS_START = 'get/videos/start';
 const GET_VIDEOS_SUCCESS = 'get/videos/success';
+const GET_VIDEOS_ERROR = 'get/videos/error';
+
+const VIDEOS_RELOAD = 'videos/reload';
 
 const GET_VIDEOS_MEDIA = 'get/videos/media';
 
@@ -10,6 +13,7 @@ const SET_IS_WATCHED = 'set/is/watched';
 
 const initialState = {
   videos: [],
+  error: null,
   videosMedia: [],
   loading: false,
 };
@@ -28,6 +32,13 @@ export default function videos(state = initialState, action) {
         videos: action.payload,
         loading: false,
       };
+      
+    case GET_VIDEOS_ERROR:
+      return {
+        ...state,
+        error: 'Произошла ошибка при загрузке...',
+        loading: false,
+      };
 
     case GET_VIDEOS_MEDIA:
       return {
@@ -35,6 +46,12 @@ export default function videos(state = initialState, action) {
         videosMedia: action.payload,
         loading: false,
       };
+
+    case VIDEOS_RELOAD: 
+      return {
+        ...state,
+        error: null,
+      }
 
     case SET_IS_WATCHED:
       return {
@@ -82,6 +99,9 @@ export const getVideos = () => {
         });
       }
     } catch (e) {
+      dispatch({
+        type: GET_VIDEOS_ERROR,
+      })
       console.log(e.response);
     }
   };
@@ -91,5 +111,11 @@ export const setIsWatched = (id) => {
   return {
     type: SET_IS_WATCHED,
     payload: id,
+  };
+};
+
+export const changeErrorVideos = () => {
+  return {
+    type: VIDEOS_RELOAD,
   };
 };

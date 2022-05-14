@@ -3,6 +3,7 @@ import { View, StyleSheet, Dimensions, ActivityIndicator } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import VideoPlayer from '../components/VideoPlayer';
 import color from '../misk/color';
+import ErrorPlayerInfo from '../misk/ErrorPlayerInfo';
 import { getVideo } from '../redux/ducks/video';
 
 const VideoPlayerScreen = (props) => {
@@ -14,10 +15,11 @@ const VideoPlayerScreen = (props) => {
 
   const video = useSelector((state) => state.video.video);
   const loading = useSelector((state) => state.video.loading);
+  const error = useSelector((state) => state.video.error);
 
   useEffect(() => {
     dispatch(getVideo(id));
-  }, [dispatch, id]);
+  }, [dispatch, id, error]);
 
   if(loading) {
     return (
@@ -29,7 +31,11 @@ const VideoPlayerScreen = (props) => {
 
   return (
     <View style={styles.container}>
-      <VideoPlayer setOptions={setOptions} video={video} />
+      {error ? (
+        <ErrorPlayerInfo />
+      ) : (
+        <VideoPlayer setOptions={setOptions} video={video} />
+      )}
     </View>
   );
 };
