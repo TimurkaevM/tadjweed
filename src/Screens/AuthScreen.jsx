@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    width: width - 80,
+    width: width > 450 ? 380 : width - 80,
     height: 50,
     paddingLeft: 15,
     borderWidth: 0,

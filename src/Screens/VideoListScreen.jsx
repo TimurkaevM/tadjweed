@@ -35,7 +35,7 @@ const VideoListScreen = ({navigation}) => {
       switch (type) {
         case 'video':
           dim.width = Dimensions.get('window').width;
-          dim.height = 270;
+          dim.height = Dimensions.get('window').width > 500 ? 470 : 270;
           break;
         default:
           dim.width = 0;

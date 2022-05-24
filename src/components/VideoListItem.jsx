@@ -82,10 +82,12 @@ export default function VideoListItem({ navigate, id, is_watched, preview }) {
 
 const { width } = Dimensions.get('window');
 
+console.log(width)
+
 const styles = StyleSheet.create({
   container: {
     alignSelf: 'center',
-    width: width - 20,
+    width: width > 500 ? 470 : width - 20,
     marginVertical: 30,
     position: 'relative',
     zIndex: 1,
@@ -94,11 +96,12 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     borderRadius: 20,
+    resizeMode: 'cover',
   },
   btn: {
     alignSelf: 'center',
-    width: width - 20,
-    height: 250,
+    width: width > 500 ? 770 : width - 20,
+    height: width > 500 ? 440 : 250,
     borderRadius: 20,
   },
   isShow: {
@@ -108,8 +111,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
     position: 'absolute',
-    top: 10,
-    right: 20,
+    top: width > 500 ? 20 : 10,
+    right: width > 500 ? -120 : 20,
     zIndex: 3000,
   },
 });
