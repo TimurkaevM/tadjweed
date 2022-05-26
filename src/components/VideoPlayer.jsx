@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as ScreenOrientation from 'expo-screen-orientation';
-import { View, StyleSheet, Dimensions, Pressable } from 'react-native';
+import { Text, View, StyleSheet, Dimensions, Pressable } from 'react-native';
 import { Video } from 'expo-av';
 
 import VideoControls from './VideoControls';
@@ -19,6 +19,7 @@ const VideoPlayer = ({ video, setOptions }) => {
   const [videoHeight, setVideoHeight] = React.useState(null);
   const [orientation, setOrientation] = useState(null);
   const [visibleControls, setVisibleControls] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
 
   const currentQuality = video.sources?.find(
     (item) => item.quality === quality,
@@ -136,13 +137,19 @@ const VideoPlayer = ({ video, setOptions }) => {
     } else {
       if (status.isLoaded === false && status.error) {
         const errorMsg = `Encountered a fatal error during playback: ${status.error}`;
-        // console.log(errorMsg, 'error');
-        // setErrorMessage(errorMsg)
+        console.log(errorMsg, 'error');
+        setErrorMessage(true);
       }
     }
   };
 
-  return (
+  return errorMessage ? (
+    <View style={{flex: 1, justifyContent: 'center'}}>
+      <Text style={{textAlign: 'center'}}>
+        Произошла оишбка при загрузке урока
+      </Text>
+    </View>
+  ) : (
     <Pressable
       onPress={changeVisibleControls}
       style={{ flex: 1, backgroundColor: '#000', justifyContent: 'center' }}

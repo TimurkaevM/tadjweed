@@ -20,7 +20,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.Muqri.tadjweed",
-      "buildNumber": "3"
+      "buildNumber": "5"
     },
     "android": {
       "adaptiveIcon": {
@@ -28,7 +28,8 @@
         "backgroundColor": "#FFFFFF"
       },
       "softwareKeyboardLayoutMode": "pan",
-      "package": "com.timurkaev.tadjweed"
+      "package": "com.timurkaev.tadjweed",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/bg2.png"
