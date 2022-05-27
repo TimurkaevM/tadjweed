@@ -28,20 +28,28 @@ export default function AuthScreen(props) {
 
   const passChange = () => {
     if(errorAuth) {
-      dispatch(ChangeError())
+      dispatch(ChangeError());
       setPasswordError(null);
-    } else {
-      setPasswordError(null);
+      return;
     }
+    if(passwordError) {
+      setPasswordError(null);
+      return;
+    }
+    return;
   };
 
   const emailChange = () => {
     if(errorAuth) {
-      dispatch(ChangeError())
+      dispatch(ChangeError());
       setEmailError(null);
-    } else {
-      setEmailError(null);
+      return;
     }
+    if(emailError) {
+      setEmailError(null);
+      return;
+    }
+    return;
   };
 
   const handleClick = () => {

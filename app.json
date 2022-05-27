@@ -24,12 +24,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/bg2.png",
         "backgroundColor": "#FFFFFF"
       },
       "softwareKeyboardLayoutMode": "pan",
       "package": "com.timurkaev.tadjweed",
-      "versionCode": 1
+      "versionCode": 3
     },
     "web": {
       "favicon": "./assets/bg2.png"

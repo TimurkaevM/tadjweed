@@ -26,35 +26,51 @@ function RegistrationScreen() {
 
   const emailChange = (e) => {
     if(error) {
-      dispatch(ChangeError())
+      dispatch(ChangeError());
       setEmailError(null);
-    } else {
-      setEmailError(null);
+      return;
     }
+    if(emailError) {
+      setEmailError(null);
+      return;
+    }
+    return;
   };
   const nameChange = (e) => {
     if(error) {
-      dispatch(ChangeError())
+      dispatch(ChangeError());
       setNameError(null);
-    } else {
-      setNameError(null);
+      return;
     }
+    if(nameError) {
+      setNameError(null);
+      return;
+    }
+    return;
   };
   const passwordChange = (e) => {
     if(error) {
-      dispatch(ChangeError())
+      dispatch(ChangeError());
       setPasswordError(null);
-    } else {
-      setPasswordError(null);
+      return;
     }
+    if(passwordError) {
+      setPasswordError(null);
+      return;
+    }
+    return;
   };
   const confirmedChange = (e) => {
     if(error) {
-      dispatch(ChangeError())
+      dispatch(ChangeError());
       setPasswordError(null);
-    } else {
-      setPasswordError(null);
+      return;
     }
+    if(passwordError) {
+      setPasswordError(null);
+      return;
+    }
+    return;
   };
 
   const handleClick = (e) => {
@@ -168,7 +184,7 @@ function RegistrationScreen() {
         </View>
         {emailError && <Text style={{ marginTop: 20, color: 'red' }}>{emailError}</Text>}
         {passwordError && <Text style={{ marginTop: 20, color: 'red' }}>{passwordError}</Text>}
-        {nameError && <Text style={{ marginTop: 20, color: 'red' }}>{nameErrnull}</Text>}
+        {nameError && <Text style={{ marginTop: 20, color: 'red' }}>{nameError}</Text>}
         {error && <Text style={{ marginTop: 20, color: 'red' }}>{error}</Text>}
       </KeyboardAwareScrollView>
     </ImageBackground>

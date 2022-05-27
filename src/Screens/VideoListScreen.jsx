@@ -1,4 +1,4 @@
-import { View, StyleSheet, Dimensions, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, Dimensions, ActivityIndicator, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import VideoListItem from '../components/VideoListItem';
@@ -19,16 +19,6 @@ const VideoListScreen = ({navigation}) => {
   const loading = useSelector((state) => state.videos.loading);
   const errorVideos = useSelector((state) => state.videos.error);
 
-  console.log(videos)
-
-  const [dataProvider, setDataProvider] = useState(
-    new DataProvider((r1, r2) => r1 !== r2),
-  );
-
-  const getVideoFiles = async () => {
-    setDataProvider(dataProvider.cloneWithRows([...videos]));
-  };
-
   const layoutProvider = new LayoutProvider(
     (i) => 'video',
     (type, dim) => {
@@ -43,21 +33,6 @@ const VideoListScreen = ({navigation}) => {
       }
     },
   );
-
-  const rowRender = (type, item) => {
-    return (
-        <VideoListItem
-          navigate={navigate}
-          is_watched={item.is_watched}
-          id={item.id}
-          preview={item.preview}
-        />
-    );
-  };
-
-  useEffect(() => {
-    getVideoFiles();
-  }, [videos]);
 
   if(loading) {
     return (
@@ -75,13 +50,19 @@ const VideoListScreen = ({navigation}) => {
         {errorVideos ? (
           <ErrorVideosInfo />
         ) : (
-          dataProvider && dataProvider.getSize() > 0 && (
-            <RecyclerListView
-              dataProvider={dataProvider}
-              layoutProvider={layoutProvider}
-              rowRenderer={rowRender}
-            />
-          )
+          <ScrollView>
+            {videos.map(item => {
+                  return (
+                    <VideoListItem
+                      navigate={navigate}
+                      is_watched={item.is_watched}
+                      id={item.id}
+                      preview={item.preview}
+                      key={item.id}
+                    />
+                );
+            })}
+          </ScrollView>
         )}
       </View>
     </View>
@@ -92,7 +73,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: color.FONT,
   },
 
   errorContainer: {

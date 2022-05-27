@@ -10,29 +10,6 @@ import {
 import { useDispatch } from 'react-redux';
 import { setIsWatched } from '../redux/ducks/videos';
 
-const convertTime = (minutes) => {
-  if (minutes) {
-    const hrs = minutes / 60;
-    const minute = hrs.toString().split('.')[0];
-    const percent = parseInt(hrs.toString().split('.')[1].slice(0, 2));
-    const sec = Math.ceil((60 * percent) / 100);
-
-    if (parseInt(minute) < 10 && sec < 10) {
-      return `0${minute}:0${sec}`;
-    }
-
-    if (parseInt(minute) < 10) {
-      return `0${minute}:${sec}`;
-    }
-
-    if (sec < 10) {
-      return `${minute}:0${sec}`;
-    }
-
-    return `${minute}:${sec}`;
-  }
-};
-
 export default function VideoListItem({ navigate, id, is_watched, preview }) {
   const dispatch = useDispatch();
 
@@ -87,8 +64,8 @@ console.log(width)
 const styles = StyleSheet.create({
   container: {
     alignSelf: 'center',
-    width: width > 500 ? 470 : width - 20,
-    marginVertical: 30,
+    width: width > 600 ? 470 : width - 20,
+    marginVertical: 20,
     position: 'relative',
     zIndex: 1,
   },
@@ -100,8 +77,8 @@ const styles = StyleSheet.create({
   },
   btn: {
     alignSelf: 'center',
-    width: width > 500 ? 770 : width - 20,
-    height: width > 500 ? 440 : 250,
+    width: width > 600 ? 770 : width - 20,
+    height: width > 600 ? 440 : 250,
     borderRadius: 20,
   },
   isShow: {
@@ -111,8 +88,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
     position: 'absolute',
-    top: width > 500 ? 20 : 10,
-    right: width > 500 ? -120 : 20,
+    top: width > 600 ? 20 : 10,
+    right: width > 600 ? -120 : 20,
     zIndex: 3000,
   },
 });
