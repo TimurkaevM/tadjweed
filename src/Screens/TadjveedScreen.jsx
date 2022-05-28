@@ -14,7 +14,7 @@ function TadjveedScreen() {
   ScreenOrientation.unlockAsync();
   const dispatch = useDispatch();
 
-  const errorVideos = useSelector(state => state.videos.error);
+  const errorVideos = useSelector((state) => state.videos.error);
 
   useEffect(() => {
     dispatch(getCurrentUser());

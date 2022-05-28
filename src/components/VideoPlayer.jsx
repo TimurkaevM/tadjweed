@@ -144,8 +144,8 @@ const VideoPlayer = ({ video, setOptions }) => {
   };
 
   return errorMessage ? (
-    <View style={{flex: 1, justifyContent: 'center'}}>
-      <Text style={{textAlign: 'center'}}>
+    <View style={{ flex: 1, justifyContent: 'center' }}>
+      <Text style={{ textAlign: 'center' }}>
         Произошла оишбка при загрузке урока
       </Text>
     </View>

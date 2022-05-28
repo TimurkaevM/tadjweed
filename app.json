@@ -29,7 +29,7 @@
       },
       "softwareKeyboardLayoutMode": "pan",
       "package": "com.timurkaev.tadjweed",
-      "versionCode": 3
+      "versionCode": 4
     },
     "web": {
       "favicon": "./assets/bg2.png"

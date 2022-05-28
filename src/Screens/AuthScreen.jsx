@@ -14,12 +14,11 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { ChangeError, login } from '../redux/ducks/auth';
 
 export default function AuthScreen(props) {
-
   const { navigate } = props.navigation;
 
   const dispatch = useDispatch();
 
-  const errorAuth = useSelector(state => state.auth.error);
+  const errorAuth = useSelector((state) => state.auth.error);
 
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -27,12 +26,12 @@ export default function AuthScreen(props) {
   const [passwordError, setPasswordError] = React.useState(null);
 
   const passChange = () => {
-    if(errorAuth) {
+    if (errorAuth) {
       dispatch(ChangeError());
       setPasswordError(null);
       return;
     }
-    if(passwordError) {
+    if (passwordError) {
       setPasswordError(null);
       return;
     }
@@ -40,12 +39,12 @@ export default function AuthScreen(props) {
   };
 
   const emailChange = () => {
-    if(errorAuth) {
+    if (errorAuth) {
       dispatch(ChangeError());
       setEmailError(null);
       return;
     }
-    if(emailError) {
+    if (emailError) {
       setEmailError(null);
       return;
     }

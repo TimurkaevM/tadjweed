@@ -26,7 +26,7 @@ export default function video(state = initialState, action) {
         video: action.payload,
         loading: false,
       };
-    
+
     case GET_VIDEO_ERROR:
       return {
         ...state,
@@ -34,11 +34,11 @@ export default function video(state = initialState, action) {
         loading: false,
       };
 
-    case VIDEO_RELOAD: 
+    case VIDEO_RELOAD:
       return {
         ...state,
         error: null,
-      }
+      };
 
     default:
       return state;
@@ -73,7 +73,7 @@ export const getVideo = (id) => {
     } catch (e) {
       dispatch({
         type: GET_VIDEO_ERROR,
-      })
+      });
       console.log(e.response);
     }
   };

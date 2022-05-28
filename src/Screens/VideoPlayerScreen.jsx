@@ -21,10 +21,10 @@ const VideoPlayerScreen = (props) => {
     dispatch(getVideo(id));
   }, [dispatch, id, error]);
 
-  if(loading) {
+  if (loading) {
     return (
       <View style={styles.preloader}>
-        <ActivityIndicator size={50} color='#16a89e' />
+        <ActivityIndicator size={50} color="#16a89e" />
       </View>
     );
   }
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   },
   preloader: {
     flex: 1,
-    justifyContent: "center"
+    justifyContent: 'center',
   },
 });
 

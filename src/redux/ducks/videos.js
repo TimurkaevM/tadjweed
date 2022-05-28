@@ -32,7 +32,7 @@ export default function videos(state = initialState, action) {
         videos: action.payload,
         loading: false,
       };
-      
+
     case GET_VIDEOS_ERROR:
       return {
         ...state,
@@ -47,11 +47,11 @@ export default function videos(state = initialState, action) {
         loading: false,
       };
 
-    case VIDEOS_RELOAD: 
+    case VIDEOS_RELOAD:
       return {
         ...state,
         error: null,
-      }
+      };
 
     case SET_IS_WATCHED:
       return {
@@ -101,7 +101,7 @@ export const getVideos = () => {
     } catch (e) {
       dispatch({
         type: GET_VIDEOS_ERROR,
-      })
+      });
       console.log(e.response);
     }
   };

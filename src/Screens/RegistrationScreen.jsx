@@ -25,48 +25,48 @@ function RegistrationScreen() {
   const [nameError, setNameError] = useState(null);
 
   const emailChange = (e) => {
-    if(error) {
+    if (error) {
       dispatch(ChangeError());
       setEmailError(null);
       return;
     }
-    if(emailError) {
+    if (emailError) {
       setEmailError(null);
       return;
     }
     return;
   };
   const nameChange = (e) => {
-    if(error) {
+    if (error) {
       dispatch(ChangeError());
       setNameError(null);
       return;
     }
-    if(nameError) {
+    if (nameError) {
       setNameError(null);
       return;
     }
     return;
   };
   const passwordChange = (e) => {
-    if(error) {
+    if (error) {
       dispatch(ChangeError());
       setPasswordError(null);
       return;
     }
-    if(passwordError) {
+    if (passwordError) {
       setPasswordError(null);
       return;
     }
     return;
   };
   const confirmedChange = (e) => {
-    if(error) {
+    if (error) {
       dispatch(ChangeError());
       setPasswordError(null);
       return;
     }
-    if(passwordError) {
+    if (passwordError) {
       setPasswordError(null);
       return;
     }
@@ -182,9 +182,15 @@ function RegistrationScreen() {
             </Text>
           </TouchableOpacity>
         </View>
-        {emailError && <Text style={{ marginTop: 20, color: 'red' }}>{emailError}</Text>}
-        {passwordError && <Text style={{ marginTop: 20, color: 'red' }}>{passwordError}</Text>}
-        {nameError && <Text style={{ marginTop: 20, color: 'red' }}>{nameError}</Text>}
+        {emailError && (
+          <Text style={{ marginTop: 20, color: 'red' }}>{emailError}</Text>
+        )}
+        {passwordError && (
+          <Text style={{ marginTop: 20, color: 'red' }}>{passwordError}</Text>
+        )}
+        {nameError && (
+          <Text style={{ marginTop: 20, color: 'red' }}>{nameError}</Text>
+        )}
         {error && <Text style={{ marginTop: 20, color: 'red' }}>{error}</Text>}
       </KeyboardAwareScrollView>
     </ImageBackground>

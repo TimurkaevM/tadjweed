@@ -59,7 +59,7 @@ export default function VideoListItem({ navigate, id, is_watched, preview }) {
 
 const { width } = Dimensions.get('window');
 
-console.log(width)
+console.log(width);
 
 const styles = StyleSheet.create({
   container: {
