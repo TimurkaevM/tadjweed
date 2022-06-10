@@ -59,8 +59,6 @@ export default function VideoListItem({ navigate, id, is_watched, preview }) {
 
 const { width } = Dimensions.get('window');
 
-console.log(width);
-
 const styles = StyleSheet.create({
   container: {
     alignSelf: 'center',
@@ -73,7 +71,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     borderRadius: 20,
-    resizeMode: 'cover',
+    resizeMode: 'center',
   },
   btn: {
     alignSelf: 'center',

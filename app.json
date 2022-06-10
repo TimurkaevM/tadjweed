@@ -2,7 +2,7 @@
   "expo": {
     "name": "Muqri-таджвид",
     "slug": "tadjweed",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "default",
     "icon": "./assets/bg2.png",
     "userInterfaceStyle": "light",
@@ -20,7 +20,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.Muqri.tadjweed",
-      "buildNumber": "5"
+      "buildNumber": "1"
     },
     "android": {
       "adaptiveIcon": {
@@ -29,7 +29,7 @@
       },
       "softwareKeyboardLayoutMode": "pan",
       "package": "com.timurkaev.tadjweed",
-      "versionCode": 5
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/bg2.png"
